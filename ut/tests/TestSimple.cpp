@@ -1,6 +1,9 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
+#include <BaseClass.h>
+#include <LastClass.h>
+
 
 // Simple test, does not use gmock
 TEST(Dummy, foobar)
@@ -10,23 +13,7 @@ TEST(Dummy, foobar)
 
 
 // Real class we want to mock
-class TeaBreak
-{
-public:
-    virtual ~TeaBreak() {}
 
-    // Return minutes taken to make the drinks
-    int morningTea()
-    {
-        return makeCoffee(true,  1) +
-               makeCoffee(false, 0.5) +
-               makeHerbalTea();
-    }
-
-private:
-    virtual int makeCoffee(bool milk, double sugars) = 0;
-    virtual int makeHerbalTea() = 0;
-};
 
 // Mock class
 class MockTeaBreak : public TeaBreak
@@ -43,10 +30,11 @@ using ::testing::_;
 // Mocked test
 TEST(TeaBreakTest, MorningTea)
 {
+    auto i = 1;
     MockTeaBreak  teaBreak;
     EXPECT_CALL(teaBreak, makeCoffee(_,_))
-        .WillOnce(Return(2))
-        .WillOnce(Return(1));
+        .WillOnce(Return(i+1))
+        .WillOnce(Return(i));
     EXPECT_CALL(teaBreak, makeHerbalTea())
         .WillOnce(Return(3));
 
