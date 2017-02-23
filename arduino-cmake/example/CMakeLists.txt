@@ -53,14 +53,14 @@ endif()
 #====================================================================#
 # Bundled blink sketch example
 #====================================================================#
-generate_arduino_firmware(blink_bundled
-    SKETCH Blink
-    PROGRAMMER usbtinyisp
-    NO_AUTOLIBS)
+#generate_arduino_firmware(blink_bundled
+#    SKETCH Blink
+#    PROGRAMMER usbtinyisp
+#    NO_AUTOLIBS)
 
-include_directories("${ARDUINO_SDK_PATH}/hardware/arduino/cores/arduino")
+#include_directories("${ARDUINO_SDK_PATH}/hardware/arduino/cores/arduino")
 
-message(STATUS "debug ARDUINO_SDK_PATH ===  ${ARDUINO_SDK_PATH}"
+#message(STATUS "debug ARDUINO_SDK_PATH ===  ${ARDUINO_SDK_PATH}"
 # Alternative: by variables
 #set(blink_bundled_SKETCH Blink)
 #set(blink_bundled_PROGRAMMER usbtinyisp)
@@ -87,15 +87,19 @@ message(STATUS "debug ARDUINO_SDK_PATH ===  ${ARDUINO_SDK_PATH}"
 #generate_arduino_library(blink_lib)
 
 
-
+function(print var_name)
+    message(STATUS "${var_name} ===  ${${var_name}}")
+endfunction()
 
 #====================================================================#
 # Advanced firwmare example
 #====================================================================#
-#generate_arduino_firmware(blink
-#    SRCS blink.cpp
-#    LIBS blink_lib
-#    BOARD uno)
+generate_arduino_firmware(blink
+    SRCS blink.cpp blink_lib.cpp
+    HDRS blink_lib.h
+    ARDLIBS SPI Wire
+    BOARD uno)
+
 
 # Alternative: by variables
 #set(blink_SRCS blink.cpp)

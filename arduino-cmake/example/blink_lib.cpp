@@ -1,10 +1,12 @@
 #if ARDUINO >= 100
-    #include "Arduino"
+    #include <Arduino.h>
 #else
     #include "WProgram.h"
 #endif
 
 #include "blink_lib.h"
+#include <Wire.h>
+#include <SPI.h>
 
 void blink_setup(uint8_t pin) {
   pinMode(pin, OUTPUT);     
