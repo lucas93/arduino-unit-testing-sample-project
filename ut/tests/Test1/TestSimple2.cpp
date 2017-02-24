@@ -2,16 +2,12 @@
 #include "gmock/gmock.h"
 
 #include <BaseClass.h>
+#include <SampleMock.h>
 
 
 
 // Mock class
-class MockTeaBreak : public TeaBreak
-{
-public:
-    MOCK_METHOD2(makeCoffee,    int(bool milk, double sugars));
-    MOCK_METHOD0(makeHerbalTea, int());
-};
+
 
 
 using ::testing::Return;
