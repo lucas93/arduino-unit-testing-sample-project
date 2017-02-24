@@ -12,6 +12,23 @@
 #endif
 
 #include "blink_lib.h"
+#include <BaseClass.h>
+
+class Derived : public TeaBreak
+{
+protected:
+  int makeCoffee(bool milk, double sugars) override
+  {
+    return milk ? sugars : -sugars;
+  }
+
+  int makeHerbalTea()
+  {
+    return 100;
+  }
+};
+
+
 
 void setup() {                
     blink_setup(); // Setup for blinking

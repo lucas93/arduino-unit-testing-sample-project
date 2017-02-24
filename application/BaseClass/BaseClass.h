@@ -7,7 +7,7 @@ public:
     int morningTea();
 
 
-private:
+protected:
     virtual int makeCoffee(bool milk, double sugars) = 0;
     virtual int makeHerbalTea() = 0;
 };

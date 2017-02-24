@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 2.8.2)
 project(DP_Example)
 
 include(CTest)
-include(GetListOfSubDirectories.cmake)
-add_compile_options(-std=c++17)
+include(utilities.cmake)
+add_compile_options(-std=c++14)
 
 if (CMAKE_VERSION VERSION_LESS 3.2)
     set(UPDATE_DISCONNECTED_IF_AVAILABLE "")
@@ -41,12 +41,11 @@ file(GLOB UNIT_TEST_SOURCES     ${UNIT_TEST_SOURCES}    ${UNIT_TESTS_DIRECTORY}/
 file(GLOB COMMON_HEADER_FILES   ${COMMON_HEADER_FILES}  ${COMMON_APPLICATION_FILES_DIRECTORY}/*/*/*.h)
 file(GLOB COMMON_SOURCE_FILES   ${COMMON_SOURCE_FILES}  ${COMMON_APPLICATION_FILES_DIRECTORY}/*/*/*.cpp)
 
-#GetListOfAllFilesInSubDirectories(  COMMON_APPLICATION_ALL_SOURCES
-#                                    COMMON_APPLICATION_FILES_SUBDIRECTORIES
-#                                    "*.cpp")
-#foreach (_variableName ${COMMON_APPLICATION_FILES_SUBDIRECTORIES})
-#    message(STATUS "${_variableName}")
-#endforeach()
+
+GetListOfAllFilesInSubDirectories(  COMMON_APPLICATION_ALL_SOURCES
+                                    COMMON_APPLICATION_FILES_SUBDIRECTORIES
+                                    "*.cpp")
+print_foreach(COMMON_APPLICATION_ALL_SOURCES)
 
 
 add_executable(unit_tests ${UNIT_TEST_SOURCES} ${COMMON_SOURCE_FILES})
